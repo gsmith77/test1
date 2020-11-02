@@ -1,23 +1,39 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'
 import './App.css';
+const marked = require('marked')
 
 function App() {
+  const [markdownText, setMarkdownText] = useState('');
+  const [opensInNewtab, setOpensInNewtab] = useState(false)
+
+  const changeInput = async (value) => {   
+    const text = marked(value)
+    setMarkdownText(text)
+    document.getElementById('markdown').innerHTML = text
+  }
+
+  const setOpenInNewtab = () => {
+    setOpensInNewtab(!opensInNewtab)
+    
+    const doc = document.getElementById('markdown').children[0].children
+    if (doc && opensInNewtab) {
+      for( let i = 0; i < doc.length; i++) {
+        doc[i].target = '_blank'
+      }
+    } else if ( doc && opensInNewtab === false) {
+      for( let i = 0; i < doc.length; i++) {
+        doc[i].target = ''
+      }
+    }
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div id="markdown"></div> 
+      <button onClick={setOpenInNewtab}>open link in new tab</button>
+      <p>{opensInNewtab}</p>
+      <input type="text" onChange={(e) => changeInput(e.target.value)} />
     </div>
   );
 }
