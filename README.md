@@ -14,7 +14,7 @@ The Web Component should meet the following requirements:
 
 - [x] Accept Markdown input from developer user of the component as a string
 - [x] Be able to render Markdown client side without making http request to Markdown server
-- [ ] Be able to make http call to Markdown server to render Markdown instead of rendering it on the client GETTING CORS
+- [ ] Be able to make http call to Markdown server to render Markdown instead of rendering it on the client GETTING CORS Error. Works in Postman when making Post Request but not locally.
 - [x] Be able to make all links in the rendered Markdown open in a new tab when clicked, but it should not be the default behavior
 - [x] Document web component API / usage (props, methods, etc.)
 
